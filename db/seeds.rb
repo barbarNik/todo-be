@@ -12,4 +12,4 @@ User.create!([
                      email: "batman@applifint.cz",
                      password_digest: BCrypt::Password.create("OtherPassword")
                  }
-             ])
+ ])
