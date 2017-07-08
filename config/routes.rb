@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  resources :items
-  post 'auth/login', to: 'authentication#authenticate'
+  scope '/api' do
+    resources :items
+    post 'login', to: 'authentication#authenticate'
+  end
 end
