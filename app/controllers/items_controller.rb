@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   # GET /items
   def index
     @items = current_user.items
-    json_response(@items)
+    json_response(@items.order(:created_at))
   end
 
   # POST /items

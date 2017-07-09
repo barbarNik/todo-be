@@ -8,8 +8,8 @@ RSpec.describe 'Items API', type: :request do
   let(:headers) {valid_headers}
 
   # Test suite for GET /items
-  describe 'GET /items' do
-    before {get '/items', params: {}, headers: headers}
+  describe 'GET /api/items' do
+    before {get '/api/items', params: {}, headers: headers}
 
     it 'returns items' do
       expect(JSON.parse(response.body)).not_to be_empty
@@ -22,8 +22,8 @@ RSpec.describe 'Items API', type: :request do
   end
 
   # Test suite for GET /items/:id
-  describe 'GET /items/:id' do
-    before {get "/items/#{item_id}", params: {}, headers: headers}
+  describe 'GET /api/items/:id' do
+    before {get "/api/items/#{item_id}", params: {}, headers: headers}
 
     context 'when the record exists' do
       it 'returns the item' do
@@ -58,7 +58,7 @@ RSpec.describe 'Items API', type: :request do
     end
 
     context 'when the request is valid' do
-      before {post '/items', params: valid_attributes, headers: headers}
+      before {post '/api/items', params: valid_attributes, headers: headers}
 
       it 'creates a item' do
         expect(JSON.parse(response.body)['item']['text']).to eq('Learn Elm')
@@ -71,7 +71,7 @@ RSpec.describe 'Items API', type: :request do
 
     context 'when the request is invalid' do
       let(:valid_attributes) {{text: nil}.to_json}
-      before {post '/items', params: valid_attributes, headers: headers}
+      before {post '/api/items', params: valid_attributes, headers: headers}
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -85,11 +85,11 @@ RSpec.describe 'Items API', type: :request do
   end
 
   # Test suite for PUT /items/:id
-  describe 'PUT /items/:id' do
+  describe 'PUT /api/items/:id' do
     let(:valid_attributes) {{title: 'Shopping'}.to_json}
 
     context 'when the record exists' do
-      before {put "/items/#{item_id}", params: valid_attributes, headers: headers}
+      before {put "/api/items/#{item_id}", params: valid_attributes, headers: headers}
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -102,8 +102,8 @@ RSpec.describe 'Items API', type: :request do
   end
 
   # Test suite for DELETE /items/:id
-  describe 'DELETE /items/:id' do
-    before {delete "/items/#{item_id}", params: {}, headers: headers}
+  describe 'DELETE /api/items/:id' do
+    before {delete "/api/items/#{item_id}", params: {}, headers: headers}
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

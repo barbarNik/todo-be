@@ -5,7 +5,7 @@ class AuthenticationController < ApplicationController
     auth_token =
         AuthenticateUser.new(auth_params[:email], auth_params[:password]).call
     @user = User.find_by(email: auth_params[:email])
-    render json: Snapshot.new(@user,auth_token)
+    render json: Snapshot.new(@user,auth_token,@user.items.order(:created_at))
   end
 
   private
